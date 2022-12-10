@@ -27,7 +27,14 @@ func main() {
 	// Create a logger for writing error messages in the same way, but use stderr as
 	// the destination and use the log.Lshortfile flag to include the relevant
 	// file name and line number.
-	errorLog := log.New(os.Stderr, "[ERROR\t", log.Ldate|log.Ltime|log.Lshortfile|log.Lshortfile)
+	errorLog := log.New(os.Stderr, "[ERROR]\t", log.Ldate|log.Ltime|log.Lshortfile|log.Lshortfile)
+
+	// Initialize a new instance of our application struct, containing the
+	// dependencies.
+	app := &application{
+		errorLog: errorLog,
+		infoLog:  infoLog,
+	}
 
 	mux := http.NewServeMux()
 
@@ -53,9 +60,9 @@ func main() {
 	// "/static" prefix before the request reaches the file server.
 	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
 
-	mux.HandleFunc("/", home)
-	mux.HandleFunc("/snippet/view", snippetView)
-	mux.HandleFunc("/snippet/create", snippetCreate)
+	mux.HandleFunc("/", app.home)
+	mux.HandleFunc("/snippet/view", app.snippetView)
+	mux.HandleFunc("/snippet/create", app.snippetCreate)
 
 	// Initialize a new http.Server struct. We set the Addr and Handler fields so
 	// that the server uses the same network address and routes as before, and set

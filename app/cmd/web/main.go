@@ -29,7 +29,7 @@ func main() {
 	// FIXME: траб вот в чем, создала в докере рут пользователя, а в базе обычного, с огранич. правами
 	// и вот хз почему, не могу подклчиться к этому новому пользователю. Давай, думай что делать, лиза
 	// пока что тут рут юзер
-	dsn := flag.String("dsn", "root:password@/snippetbox?parseTime=true", "MySQL data source name")
+	dsn := flag.String("dsn", "root:password@tcp(db_mysql)/snippetbox?parseTime=true", "MySQL data source name")
 
 	// Importantly, we use the flag.Parse() function to parse the commandline flag.
 	// This reads in the command-line flag value and assigns it to the addr

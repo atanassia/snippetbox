@@ -79,6 +79,7 @@ func (m *SnippetModel) Latest() ([]*Snippet, error) {
 
 }
 
+
 // Go provides three different methods for executing database queries:
 // 	1. DB.Query() is used for SELECT queries which return multiple rows.
 // 	2. DB.QueryRow() is used for SELECT queries which return a single row.

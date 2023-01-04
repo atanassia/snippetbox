@@ -2,8 +2,9 @@ package main
 
 import (
 	"github.com/atanassia/snippetbox/internal/models"
-	"html/template" // New import
-	"path/filepath" // New import
+	"html/template"
+	"path/filepath"
+	"time"
 )
 
 // Define a templateData type to act as the holding structure for
@@ -13,8 +14,18 @@ import (
 
 // Include a Snippets field in the templateData struct.
 type templateData struct {
-	Snippet  *models.Snippet
-	Snippets []*models.Snippet
+	CurrentYear int
+	Snippet     *models.Snippet
+	Snippets    []*models.Snippet
+	Form        any
+}
+
+func humanDate(t time.Time) string {
+	return t.Format("02 Jan 2006 at 15:04")
+}
+
+var functions = template.FuncMap{
+	"humanDate": humanDate,
 }
 
 func newTemplateCache() (map[string]*template.Template, error) {
@@ -34,7 +45,7 @@ func newTemplateCache() (map[string]*template.Template, error) {
 		// and assign it to the name variable.
 		name := filepath.Base(page)
 
-		ts, err := template.ParseFiles("/usr/src/app/ui/html/layout/base.tmpl")
+		ts, err := template.New(name).Funcs(functions).ParseFiles("/usr/src/app/ui/html/layout/base.tmpl")
 		if err != nil {
 			return nil, err
 		}

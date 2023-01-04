@@ -76,7 +76,6 @@ func (m *SnippetModel) Latest() ([]*Snippet, error) {
 	}
 	// If everything went OK then return the Snippets slice.
 	return snippets, nil
-
 }
 
 

@@ -7,7 +7,11 @@
                 <strong>{{.Title}}</strong>
                 <span>#{{.ID}}</span>
             </div>
-            <pre><code>{{.Content}}</code></pre>
+
+            <div class="snippet-code">
+                <pre><code>{{.Content}}</code></pre>
+            </div>
+
             <div class='metadata'>
                 <time>Created: {{humanDate .Created}}</time>
                 <time>Expires: {{humanDate .Expires}}</time>

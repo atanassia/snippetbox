@@ -1,1 +1,1 @@
-snippetbox project
+snippetbox сайтик

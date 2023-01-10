@@ -20,6 +20,7 @@
 # Go workspace file
 go.work
 
-tmp/
+/help.txt
 
-help.txt
+app/tmp/*.log
+app/tls/*.pem
